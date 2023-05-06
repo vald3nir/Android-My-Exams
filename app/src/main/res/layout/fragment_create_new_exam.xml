@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_background_color">
+
+    <com.vald3nir.core.presentation.components.molecules.CustomNavigationComponent
+        android:id="@+id/navigator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:nvTitle="@string/insert_new_exam"
+        app:nvTitleColor="@color/primary_color" />
+
+    <com.vald3nir.my_exams.presentation.components.ExamInputComponent
+        android:id="@+id/cp_inputs"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/default_margin_screen"
+        android:layout_marginVertical="@dimen/default_margin_screen"
+        app:layout_constraintBottom_toTopOf="@+id/btn_confirm"
+        app:layout_constraintTop_toBottomOf="@+id/navigator" />
+
+    <com.vald3nir.core.presentation.components.atoms.CustomButton
+        android:id="@+id/btn_confirm"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/default_margin_screen"
+        android:layout_marginBottom="10dp"
+        android:text="@string/insert"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

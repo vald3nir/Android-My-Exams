@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.vald3nir.core.presentation.components.atoms.InputDateViewComponent
+            android:id="@+id/edt_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin_screen" />
+
+        <com.vald3nir.core.presentation.components.atoms.InputViewComponent
+            android:id="@+id/edt_total_cholesterol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin_screen" />
+
+        <com.vald3nir.core.presentation.components.atoms.InputViewComponent
+            android:id="@+id/edt_hdl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin_screen" />
+
+        <com.vald3nir.core.presentation.components.atoms.InputViewComponent
+            android:id="@+id/edt_not_hdl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin_screen" />
+
+        <com.vald3nir.core.presentation.components.atoms.InputViewComponent
+            android:id="@+id/edt_ldl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin_screen" />
+
+        <com.vald3nir.core.presentation.components.atoms.InputViewComponent
+            android:id="@+id/edt_triglycerides"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin_screen" />
+
+        <com.vald3nir.core.presentation.components.atoms.InputViewComponent
+            android:id="@+id/edt_uric_acid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin_screen" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Meus Exames</string>
+
+    <!-- Actions -->
+    <string name="loading">Carregando</string>
+    <string name="logout">Desconectar</string>
+    <string name="insert_new_exam">Inserir Novo Exame</string>
+    <string name="insert">Inserir</string>
+    <string name="delete">Remover</string>
+    <string name="edit">Editar</string>
+    <string name="update">Atualizar</string>
+
+    <!-- Titles -->
+    <string name="new_exam">Novo Exame</string>
+    <string name="exam_history">Histórico de Exames</string>
+    <string name="date_">Data:</string>
+    <string name="exam_detail">Detalhes do Exames</string>
+    <string name="update_exam">Atualizar Exame</string>
+    <string name="status_normal">Normal</string>
+    <string name="status_altered">Alterações: %d</string>
+
+    <!-- Exam Fields -->
+    <string name="exam_date">Data do exame</string>
+    <string name="total_cholesterol">Colesterol Total</string>
+    <string name="hdl_d">HDL-D</string>
+    <string name="no_hdl">Não-HDL</string>
+    <string name="ldl">LDL</string>
+    <string name="triglycerides">Triglicérides</string>
+    <string name="uric_acid">Ácido Úrico</string>
+
+    <!-- Messages -->
+    <string name="exams_not_found_description">Você ainda não tem exames cadastrados.\n\nPara inserir um novo exame basta apertar o botão abaixo.</string>
+    <string name="edit_exam_detail">Preencha os campos abaixo para atualizar os resultados do seu exame de sangue."</string>
+    <string name="create_exam_detail">Preencha os campos abaixo para incluir os resultados do seu exame de sangue."</string>
+    <string name="warning_date_empty">Você deve informar uma data valida!</string>
+    <string name="success_insert_exam">Exame Adicionado com sucesso</string>
+
+    <!-- Dialog -->
+    <string name="dialog_delete_exam_title">Apagar Exame</string>
+    <string name="dialog_delete_exam_message">Deseja remover este exame?</string>
+    <string name="dialog_btn_confirm">Sim</string>
+    <string name="dialog_btn_cancel">Não</string>
+</resources>

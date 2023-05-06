@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_background_color">
+
+    <com.vald3nir.core.presentation.components.molecules.CustomNavigationComponent
+        android:id="@+id/navigator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:nvTitle="@string/exam_detail"
+        app:nvTitleColor="@color/primary_color" />
+
+    <TextView
+        android:id="@+id/txv_description"
+        style="@style/NormalStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/default_margin_screen"
+        android:layout_marginTop="@dimen/default_margin_screen"
+        android:text="@string/edit_exam_detail"
+        app:layout_constraintTop_toBottomOf="@+id/navigator" />
+
+    <com.vald3nir.my_exams.presentation.components.ExamInputComponent
+        android:id="@+id/cp_inputs"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/default_margin_screen"
+        android:layout_marginTop="@dimen/default_margin_screen"
+        app:layout_constraintBottom_toTopOf="@+id/cl_buttons"
+        app:layout_constraintTop_toBottomOf="@+id/txv_description" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/default_margin_screen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.vald3nir.core.presentation.components.atoms.CustomButton
+            android:id="@+id/btn_delete"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin_screen"
+            android:background="@color/red"
+            android:text="@string/delete"
+            android:textColor="@color/default_btn_text_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_confirm"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.vald3nir.core.presentation.components.atoms.CustomButton
+            android:id="@+id/btn_confirm"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin_screen"
+            android:text="@string/update"
+            android:textColor="@color/default_btn_text_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_delete"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
