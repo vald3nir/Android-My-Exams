@@ -10,3 +10,4 @@
 local.properties
 database/src/__pycache__/
 database/__pycache__/
+app/release/

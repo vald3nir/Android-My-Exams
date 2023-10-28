@@ -4,6 +4,12 @@ import com.vald3nir.my_exams.data.dto.ExamDTO
 
 interface ExamUseCase {
 
+    suspend fun runLiveDemo(
+        onShowLoading: ((Boolean) -> Unit)? = null,
+        onSuccess: () -> Unit,
+        onError: (e: Exception?) -> Unit
+    )
+
     suspend fun downloadExams(
         key: String,
         onShowLoading: ((Boolean) -> Unit)? = null,
@@ -33,7 +39,7 @@ interface ExamUseCase {
     )
 
     suspend fun updateExam(
-        key: String,
+        key: String?,
         exam: ExamDTO,
         onShowLoading: ((Boolean) -> Unit)? = null,
         onSuccess: () -> Unit,

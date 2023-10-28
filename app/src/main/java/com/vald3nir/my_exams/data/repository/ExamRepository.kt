@@ -33,8 +33,15 @@ interface ExamRepository {
     )
 
     suspend fun updateExam(
-        key: String,
+        key: String?,
         exam: ExamDTO,
+        onShowLoading: ((Boolean) -> Unit)? = null,
+        onSuccess: () -> Unit,
+        onError: (e: Exception?) -> Unit
+    )
+
+    suspend fun insertExams(
+        exams: List<ExamDTO>,
         onShowLoading: ((Boolean) -> Unit)? = null,
         onSuccess: () -> Unit,
         onError: (e: Exception?) -> Unit

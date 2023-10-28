@@ -4,6 +4,7 @@
     <!-- Actions -->
     <string name="loading">Carregando</string>
     <string name="logout">Desconectar</string>
+    <string name="login">Login</string>
     <string name="insert_new_exam">Inserir Novo Exame</string>
     <string name="insert">Inserir</string>
     <string name="delete">Remover</string>
@@ -40,4 +41,9 @@
     <string name="dialog_delete_exam_message">Deseja remover este exame?</string>
     <string name="dialog_btn_confirm">Sim</string>
     <string name="dialog_btn_cancel">Não</string>
+
+    <!-- Login -->
+    <string name="login_info_title">Você deve se autenticar para fazer utilizar este aplicativo.</string>
+    <string name="login_info_alternative">Ou se preferir, você pode fazer um teste. No entanto, as informações apresentadas são apenas ilustrativas e não serão salvas em nossos servidores.</string>
+    <string name="login_btn_try_test">Fazer um teste</string>
 </resources>

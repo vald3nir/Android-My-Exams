@@ -68,6 +68,7 @@ class MyExamsFragment : CoreFragment(R.layout.fragment_my_exams) {
 
         btnNewExam.setOnClickListener { redirectToCreateNewExam() }
 
+        txvLogout.text = viewModel.logoutTextButton(requireContext())
         txvLogout.setOnClickListener { logout() }
     }
 

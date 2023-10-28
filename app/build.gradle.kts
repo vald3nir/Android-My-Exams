@@ -36,9 +36,10 @@ android {
     compileSdk = 34
     defaultConfig {
         applicationId = "com.vald3nir.my_exams"
+        targetSdk = 34
         minSdk = 24
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 5
+        versionName = "1.0.0"
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -84,7 +85,6 @@ dependencies {
 
     // Firebase
     implementation("com.google.firebase:firebase-crashlytics-ktx:18.4.3")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.3.0")
 
     // Modules
     implementation(project(mapOf("path" to ":toolkit:auth")))

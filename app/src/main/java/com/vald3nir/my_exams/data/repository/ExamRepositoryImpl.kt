@@ -62,7 +62,7 @@ class ExamRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateExam(
-        key: String,
+        key: String?,
         exam: ExamDTO,
         onShowLoading: ((Boolean) -> Unit)?,
         onSuccess: () -> Unit,
@@ -70,7 +70,11 @@ class ExamRepositoryImpl @Inject constructor(
     ) {
         try {
             examDAO.updateExam(exam.asEntity())
-            uploadExams(key, onShowLoading, onSuccess, onError)
+            key?.let {
+                uploadExams(it, onShowLoading, onSuccess, onError)
+            } ?: run {
+                onSuccess.invoke()
+            }
         } catch (e: Exception) {
             onError.invoke(e)
         }
@@ -87,6 +91,23 @@ class ExamRepositoryImpl @Inject constructor(
             examDAO.deleteExamById(exam.id)
             uploadExams(key, onShowLoading, onSuccess, onError)
         } catch (e: Exception) {
+            onError.invoke(e)
+        }
+    }
+
+    override suspend fun insertExams(
+        exams: List<ExamDTO>,
+        onShowLoading: ((Boolean) -> Unit)?,
+        onSuccess: () -> Unit,
+        onError: (e: Exception?) -> Unit
+    ) {
+        try {
+            onShowLoading?.invoke(true)
+            examDAO.clear()
+            examDAO.insertExams(exams.asEntity())
+            onSuccess.invoke()
+        } catch (e: Exception) {
+            onShowLoading?.invoke(false)
             onError.invoke(e)
         }
     }

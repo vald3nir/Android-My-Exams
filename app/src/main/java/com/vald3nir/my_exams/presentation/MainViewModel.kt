@@ -9,6 +9,7 @@ import com.vald3nir.auth.google.GoogleUserDTO
 import com.vald3nir.core.presentation.CoreFragment
 import com.vald3nir.core.presentation.CoreViewModel
 import com.vald3nir.firebase_helpers.parseEmailToKey
+import com.vald3nir.my_exams.R
 import com.vald3nir.my_exams.data.dto.ExamDTO
 import com.vald3nir.my_exams.domain.use_cases.ExamUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,10 +26,8 @@ class MainViewModel @Inject constructor(private val examUseCase: ExamUseCase) : 
 
     var googleUserDTO: GoogleUserDTO? = null
 
-    fun authenticateUser(fragment: CoreFragment) {
-        viewModelScope.launch {
-            GoogleSign.googleAuthenticate(fragment.activity)
-        }
+    fun logoutTextButton(context: Context): String {
+        return context.getString(if (googleUserDTO == null) R.string.login else R.string.logout)
     }
 
     fun logout(fragment: CoreFragment, onSuccess: () -> Unit) {
@@ -47,6 +46,16 @@ class MainViewModel @Inject constructor(private val examUseCase: ExamUseCase) : 
                 googleUserDTO = it
                 onSuccess.invoke()
             })
+        }
+    }
+
+    fun runLiveDemo(onSuccess: () -> Unit) {
+        viewModelScope.launch {
+            examUseCase.runLiveDemo(
+                onShowLoading = showLoading,
+                onSuccess = onSuccess,
+                onError = onError
+            )
         }
     }
 
@@ -87,8 +96,7 @@ class MainViewModel @Inject constructor(private val examUseCase: ExamUseCase) : 
     fun loadExams() {
         viewModelScope.launch {
             examUseCase.loadExamsLocal(
-                onSuccess = { _exams.value = it },
-                onError = onError
+                onShowLoading = showLoading, onSuccess = { _exams.value = it }, onError = onError
             )
         }
     }
@@ -101,10 +109,10 @@ class MainViewModel @Inject constructor(private val examUseCase: ExamUseCase) : 
     var currentExamDTO: ExamDTO? = null
 
     fun updateExam(examDTO: ExamDTO, onSuccess: () -> Unit) {
-        googleUserDTO?.email?.let { email ->
+        googleUserDTO?.email.let { email ->
             viewModelScope.launch {
                 examUseCase.updateExam(
-                    key = email.parseEmailToKey(),
+                    key = email?.parseEmailToKey(),
                     exam = examDTO,
                     onShowLoading = showLoading,
                     onSuccess = onSuccess,
