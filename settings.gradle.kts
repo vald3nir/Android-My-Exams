@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "my_exams"
+rootProject.name = "Exams"
 include(":app")
 include(":toolkit:auth")
 include(":toolkit:core")

@@ -38,8 +38,8 @@ android {
         applicationId = "com.vald3nir.my_exams"
         targetSdk = 34
         minSdk = 24
-        versionCode = 5
-        versionName = "1.0.0"
+        versionCode = 6
+        versionName = "1.0.1"
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
