@@ -36,9 +36,7 @@ class CreateNewExamFragment : CoreFragment(R.layout.fragment_create_new_exam) {
             if (exam.date.isNullOrEmpty()) {
                 showMessage(getString(R.string.warning_date_empty))
             } else {
-                viewModel.insertExam(exam, requireContext()) {
-                    onBackPressed()
-                }
+                viewModel.insertExam(exam) { onBackPressed() }
             }
         }
     }

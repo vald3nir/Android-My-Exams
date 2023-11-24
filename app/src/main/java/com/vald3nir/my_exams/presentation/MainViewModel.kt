@@ -141,7 +141,7 @@ class MainViewModel @Inject constructor(private val examUseCase: ExamUseCase) : 
     // Create new Exam
     // ---------------------------------------------------------------------------------------------
 
-    fun insertExam(examDTO: ExamDTO, context: Context, onSuccess: () -> Unit) {
+    fun insertExam(examDTO: ExamDTO, onSuccess: () -> Unit) {
         googleUserDTO?.email?.let { email ->
             viewModelScope.launch {
                 examUseCase.insertNewExam(
