@@ -4,3 +4,6 @@
 [submodule "database/toolkit"]
 	path = database/toolkit
 	url = https://github.com/vald3nir/Python-Toolkit.git
+[submodule "database/keys"]
+	path = database/keys
+	url = https://github.com/vald3nir/Project-Keys.git
