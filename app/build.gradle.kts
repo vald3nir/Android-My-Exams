@@ -56,6 +56,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("release")
+            firebaseAppDistribution {
+                appId = "1:136497108047:android:72ddf19f6659fb4a8a863a"
+                artifactType = "APK"
+                releaseNotes = "Release notes for demo version"
+                groups = "prod-test"
+            }
         }
         debug {
             applicationIdSuffix = "debug"
@@ -102,6 +108,8 @@ dependencies {
     // Android Navigator
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
+    implementation("com.google.firebase:firebase-analytics:22.1.2")
+    implementation("com.google.firebase:firebase-config:22.0.1")
 
     // Database
     val roomVersion = "2.5.2"
@@ -110,8 +118,8 @@ dependencies {
     implementation("androidx.room:room-ktx:$roomVersion")
 
     // Hilt dependencies
-    implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-compiler:2.48")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-compiler:2.51.1")
 
     // Tests
     testImplementation("junit:junit:4.13.2")
@@ -127,4 +135,10 @@ hilt {
     enableExperimentalClasspathAggregation = true
     enableTransformForLocalTests = true
     enableAggregatingTask = true
+}
+
+tasks.register("releaseAndPublish") {
+    dependsOn("assembleRelease", "appDistributionUploadRelease")
+    group = "distribution"
+    description = "Gera o APK/AAB de release e publica no App Distribution."
 }
