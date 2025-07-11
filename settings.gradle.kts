@@ -1,8 +1,16 @@
 pluginManagement {
+    includeBuild("toolkit/build-logic")
     repositories {
-        google()
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
         mavenCentral()
         gradlePluginPortal()
+        maven { url = uri("https://www.jitpack.io") }
     }
 }
 dependencyResolutionManagement {
@@ -13,8 +21,11 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Exams"
+rootProject.name = "MyExams"
 include(":app")
-include(":toolkit:auth")
-include(":toolkit:core")
-include(":toolkit:repository:firebase")
+include(":toolkit:networking")
+include(":toolkit:helpers")
+include(":toolkit:compose")
+include(":toolkit:services")
+include(":toolkit:firebase")
+include(":toolkit:autentication")

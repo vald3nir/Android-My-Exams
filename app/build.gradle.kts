@@ -1,144 +1,51 @@
-import java.io.FileInputStream
-import java.util.Properties
+import com.toolkit.plugs.getEnvParameter
+import com.toolkit.plugs.setupSigningConfigs
 
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("androidx.navigation.safeargs.kotlin")
-    id("kotlin-kapt")
-    id("kotlinx-serialization")
-    id("com.google.dagger.hilt.android")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
-    id("com.google.firebase.appdistribution")
+    alias(libs.plugins.toolkit.application)
+    alias(libs.plugins.toolkit.hilt)
+    alias(libs.plugins.toolkit.room)
+    alias(libs.plugins.toolkit.firebase)
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.google.firebase.appdistribution)
+    alias(libs.plugins.google.firebase.crashlytics)
 }
 
-val keystorePropertiesFile = rootProject.file("toolkit/auth/keyStore.properties")
-val keystoreProperties = Properties()
-keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+// todo replace for your .env file path
+val envFilePath = "D:\\Documents\\GitHub\\Documents\\environments\\my-exams.env"
+val pathKeyStore = getEnvParameter(envFilePath = envFilePath, key = "KEY_STORE_PATH")
+val keyAlias = getEnvParameter(envFilePath = envFilePath, key = "KEY_STORE_ALIAS")
+val keyPassword = getEnvParameter(envFilePath = envFilePath, key = "KEY_STORE_PASSWORD")
+val storePassword = getEnvParameter(envFilePath = envFilePath, key = "STORE_PASSWORD")
+val serverClientID = getEnvParameter(envFilePath = envFilePath, key = "SERVER_CLIENT_ID")
+
+
 
 android {
-    signingConfigs {
-        getByName("debug") {
-            keyAlias = keystoreProperties.getProperty("keyAlias")
-            keyPassword = keystoreProperties.getProperty("keyPassword")
-            storeFile = file(keystoreProperties.getProperty("storeFile"))
-            storePassword = keystoreProperties.getProperty("storePassword")
-        }
-        create("release") {
-            keyAlias = keystoreProperties.getProperty("keyAlias")
-            keyPassword = keystoreProperties.getProperty("keyPassword")
-            storeFile = file(keystoreProperties.getProperty("storeFile"))
-            storePassword = keystoreProperties.getProperty("storePassword")
-        }
-    }
-    namespace = "com.vald3nir.my_exams"
-    compileSdk = 34
+    namespace = "com.vald3nir.myexams"
     defaultConfig {
-        applicationId = "com.vald3nir.my_exams"
-        targetSdk = 34
-        minSdk = 24
-        versionCode = 6
-        versionName = "1.0.1"
-        multiDexEnabled = true
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    packaging {
-        resources {
-            excludes.add("META-INF/*")
-        }
-    }
-    buildTypes {
-        release {
-            applicationIdSuffix = ""
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-            )
-            signingConfig = signingConfigs.getByName("release")
-            firebaseAppDistribution {
-                appId = "1:136497108047:android:72ddf19f6659fb4a8a863a"
-                artifactType = "APK"
-                releaseNotes = "Release notes for demo version"
-                groups = "prod-test"
-            }
-        }
-        debug {
-            applicationIdSuffix = "debug"
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    buildFeatures {
-        viewBinding = true
+        applicationId = namespace
+        versionCode = 1
+        versionName = "2025.1.0"
+
+        setupSigningConfigs(
+            pathKeyStore = pathKeyStore,
+            keyAlias = keyAlias,
+            keyPassword = keyPassword,
+            storePassword = storePassword
+        )
+
+        buildConfigField("String", "SERVER_CLIENT_ID", serverClientID)
+        buildConfigField("int", "DB_VERSION", versionCode.toString())
     }
 }
 
 dependencies {
-
-    // Android Libraries
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.annotation:annotation:1.7.0")
-    implementation("androidx.activity:activity-ktx:1.7.2")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-
-    // Firebase
-    implementation("com.google.firebase:firebase-crashlytics-ktx:18.4.3")
-
-    // Modules
-    implementation(project(mapOf("path" to ":toolkit:auth")))
-    implementation(project(mapOf("path" to ":toolkit:repository:firebase")))
-    implementation(project(mapOf("path" to ":toolkit:core")))
-
-    // Kotlin Serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-
-    // Lifecycle
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-
-    // Android Navigator
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
-    implementation("com.google.firebase:firebase-analytics:22.1.2")
-    implementation("com.google.firebase:firebase-config:22.0.1")
-
-    // Database
-    val roomVersion = "2.5.2"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-
-    // Hilt dependencies
-    implementation("com.google.dagger:hilt-android:2.51.1")
-    kapt("com.google.dagger:hilt-compiler:2.51.1")
-
-    // Tests
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-}
-
-kapt {
-    correctErrorTypes = true
-}
-
-hilt {
-    enableExperimentalClasspathAggregation = true
-    enableTransformForLocalTests = true
-    enableAggregatingTask = true
-}
-
-tasks.register("releaseAndPublish") {
-    dependsOn("assembleRelease", "appDistributionUploadRelease")
-    group = "distribution"
-    description = "Gera o APK/AAB de release e publica no App Distribution."
+    implementation(project(":toolkit:compose"))
+    implementation(project(":toolkit:helpers"))
+    implementation(project(":toolkit:networking"))
+    implementation(project(":toolkit:firebase"))
+    implementation(project(":toolkit:autentication"))
+    implementation(libs.firebase.crashlytics)
 }

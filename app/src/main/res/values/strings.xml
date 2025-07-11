@@ -3,25 +3,40 @@
 
     <!-- Actions -->
     <string name="loading">Carregando</string>
-    <string name="logout">Desconectar</string>
+    <string name="logout">Sair</string>
     <string name="login">Login</string>
-    <string name="insert_new_exam">Inserir Novo Exame</string>
     <string name="insert">Inserir</string>
     <string name="delete">Remover</string>
     <string name="edit">Editar</string>
     <string name="update">Atualizar</string>
+    <string name="btn_continue">Continuar</string>
+    <string name="research">Pesquisar</string>
 
-    <!-- Titles -->
+    <!-- Screens -->
+    <string name="edit_profile_title">Editar Perfil</string>
+    <string name="edit_profile_description">Preencha os campos abaixo para atualizar seu perfil. As informações fornecidas são essenciais para a validação adequada dos exames.</string>
+    <string name="select_laboratory">Seleção de laboratório</string>
+    <string name="select_laboratory_description">Antes de cadastrar um novo exame, informe o nome do laboratório onde a coleta foi feita.</string>
+    <string name="edit_laboratory_description">Informe o nome do laboratório onde a coleta foi feita.</string>
+    <string name="select_exam_date">Seleção de data do exame</string>
+    <string name="select_exam_date_description">Selecione a data que foi realizado o exame.</string>
+    <string name="edit_exam_date">Editar data</string>
+    <string name="insert_new_exam">Inserir Novo Exame</string>
     <string name="new_exam">Novo Exame</string>
     <string name="exam_history">Histórico de Exames</string>
-    <string name="date_">Data:</string>
-    <string name="exam_detail">Detalhes do Exames</string>
+    <string name="date">Data</string>
+    <string name="exam_detail">Detalhes do exame</string>
     <string name="update_exam">Atualizar Exame</string>
     <string name="status_normal">Normal</string>
-    <string name="status_altered">Alterações: %d</string>
+    <string name="status_altered">Alterações: %1$d</string>
+    <string name="selected_date_">Data selecionada: %1$s</string>
+    <string name="select_date">Selecionar data</string>
+    <string name="birthday_date_">Data de nascimento:</string>
+    <string name="gender_">Gênero:</string>
 
     <!-- Exam Fields -->
-    <string name="exam_date">Data do exame</string>
+    <string name="lab_">Laboratório:</string>
+    <string name="exam_date_">Data do exame:</string>
     <string name="total_cholesterol">Colesterol Total</string>
     <string name="hdl_d">HDL-D</string>
     <string name="no_hdl">Não-HDL</string>
@@ -34,16 +49,18 @@
     <string name="edit_exam_detail">Preencha os campos abaixo para atualizar os resultados do seu exame de sangue."</string>
     <string name="create_exam_detail">Preencha os campos abaixo para incluir os resultados do seu exame de sangue."</string>
     <string name="warning_date_empty">Você deve informar uma data valida!</string>
-    <string name="success_insert_exam">Exame Adicionado com sucesso</string>
+    <string name="message_insert_exam">Exame Adicionado com sucesso</string>
+    <string name="message_exam_updated">Exame atualizado com sucesso</string>
+    <string name="message_exam_deleted">O exame foi removido</string>
+    <string name="empty_list_message">Você ainda não cadastrou nenhum exame.</string>
+
+    <!-- Edit exam menu -->
+    <string name="edit_exam_lab">Editar laboratório</string>
+    <string name="edit_exam_fields">Editar exame</string>
+    <string name="delete_exam">Apagar exame</string>
 
     <!-- Dialog -->
-    <string name="dialog_delete_exam_title">Apagar Exame</string>
     <string name="dialog_delete_exam_message">Deseja remover este exame?</string>
     <string name="dialog_btn_confirm">Sim</string>
     <string name="dialog_btn_cancel">Não</string>
-
-    <!-- Login -->
-    <string name="login_info_title">Você deve se autenticar para fazer utilizar este aplicativo.</string>
-    <string name="login_info_alternative">Ou se preferir, você pode fazer um teste. No entanto, as informações apresentadas são apenas ilustrativas e não serão salvas em nossos servidores.</string>
-    <string name="login_btn_try_test">Fazer um teste</string>
 </resources>
