@@ -1,17 +1,27 @@
-# My Exams
-An application to store blood test histories
+# 🧪 Meus Exames - Android
 
-## Project Details
+Um aplicativo Android simples e funcional para gerenciar e acompanhar seus exames de sangue.
 
-- Sign in with Google authentication
-- Hilt [Dependency Injection]
-- MVVM Architecture 
-- Room Database 
-- Firebase Platform
+## 🩺 Funcionalidades
 
-## Print Screens
+- 🗂️ Armazena um histórico de exames  
+- 📊 Indica parâmetros do exame que estão fora da faixa de referência  
+- ☁️ Permite backup dos dados na nuvem  
 
-![image](https://github.com/vald3nir/Android-My-Exams/assets/23506996/da528f08-fc5e-46ae-ae06-94912ed19e58)
-![image](https://github.com/vald3nir/Android-My-Exams/assets/23506996/2d92d9e0-60b1-4271-9cb0-9c37b00fc0ac)
-![image](https://github.com/vald3nir/Android-My-Exams/assets/23506996/6a37a57f-ac19-4c8c-a413-8d88f9306132)
-![image](https://github.com/vald3nir/Android-My-Exams/assets/23506996/e0d28272-4c4d-40c0-bfb2-41f84f708e09)
+## 🧬 Tecnologias Utilizadas
+
+- **Kotlin**  
+- **Jetpack Compose**  
+- **Room** (persistência local)  
+- **ViewModel** + **LiveData**/**StateFlow**  
+- **Material Design 3**  
+- **Firebase Authentication** / **Firestore**  
+- Biblioteca local [**Toolkit**], encapsulando diversas bibliotecas e utilitários  
+
+## 🖼️ Capturas de Tela
+
+<img width="360" height="780" alt="image" src="https://github.com/user-attachments/assets/1a6bdba7-6684-4199-835c-a941b10492fb" />
+<img width="360" height="780" alt="image" src="https://github.com/user-attachments/assets/86e0a60b-f384-49cc-b9c1-cf77cf4a7ee9" />
+<img width="360" height="780" alt="image" src="https://github.com/user-attachments/assets/8876abb2-d60b-4bd1-b28e-c009f43b606f" />
+<img width="360" height="780" alt="image" src="https://github.com/user-attachments/assets/b81e01d5-ddea-4953-b745-d2ad3c1c1d36" />
+

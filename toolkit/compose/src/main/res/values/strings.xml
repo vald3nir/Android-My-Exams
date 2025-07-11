@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="logotype">Logotipo</string>
+    <string name="btn_add">Adicionar</string>
+    <string name="no_items_registered">Sem itens cadastrados</string>
+</resources>
