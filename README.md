@@ -1,27 +1,49 @@
-# 🧪 Meus Exames - Android
+# 🩸 Meus Exames de Sangue
 
-Um aplicativo Android simples e funcional para gerenciar e acompanhar seus exames de sangue.
+![Android](https://img.shields.io/badge/Platform-Android-green?style=flat-square&logo=android)
+![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple?style=flat-square&logo=kotlin)
+![Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=flat-square&logo=jetpackcompose)
+![Architecture](https://img.shields.io/badge/Architecture-Modular%20MVVM-orange?style=flat-square)
 
-## 🩺 Funcionalidades
+O **Meus Exames de Sangue** é um aplicativo Android desenvolvido para o registro, gerenciamento e acompanhamento do histórico de exames laboratoriais. O app permite criar, editar e agrupar resultados, consultar detalhes, acompanhar a evolução temporal de indicadores de saúde por meio de gráficos e anexar documentos (PDFs e imagens).
 
-- 🗂️ Armazena um histórico de exames  
-- 📊 Indica parâmetros do exame que estão fora da faixa de referência  
-- ☁️ Permite backup dos dados na nuvem  
+Projetado com foco em alta modularidade, escalabilidade, experiência do usuário (UX) e sincronização segura de dados com backend em nuvem.
 
-## 🧬 Tecnologias Utilizadas
+---
 
-- **Kotlin**  
-- **Jetpack Compose**  
-- **Room** (persistência local)  
-- **ViewModel** + **LiveData**/**StateFlow**  
-- **Material Design 3**  
-- **Firebase Authentication** / **Firestore**  
-- Biblioteca local [**Toolkit**], encapsulando diversas bibliotecas e utilitários  
+## ✨ Funcionalidades
 
-## 🖼️ Capturas de Tela
+- **Gerenciamento de Exames:** Cadastro, edição e listagem detalhada de exames (data, laboratório, campos e valores de referência).
+- **Evolução de Indicadores:** Gráficos históricos para acompanhamento da variação de parâmetros ao longo do tempo.
+- **Anexos e Documentos:** Leitura, exportação e visualização de arquivos PDF e imagens.
+- **Digitalização (Scanner):** Captura rápida de exames e laudos via câmera do dispositivo.
+- **Autenticação Segura:** Login social (Google/Firebase) com persistência e controle de sessão.
+- **Sincronização Cloud:** Backup e sincronização em tempo real via Supabase/Firebase.
+- **Monitoramento:** Telemetria de erros e crashes via Firebase Crashlytics.
 
-<img width="360" height="780" alt="image" src="https://github.com/user-attachments/assets/1a6bdba7-6684-4199-835c-a941b10492fb" />
-<img width="360" height="780" alt="image" src="https://github.com/user-attachments/assets/86e0a60b-f384-49cc-b9c1-cf77cf4a7ee9" />
-<img width="360" height="780" alt="image" src="https://github.com/user-attachments/assets/8876abb2-d60b-4bd1-b28e-c009f43b606f" />
-<img width="360" height="780" alt="image" src="https://github.com/user-attachments/assets/b81e01d5-ddea-4953-b745-d2ad3c1c1d36" />
+---
 
+## 🛠️ Tecnologias e Bibliotecas
+
+- **Linguagem:** [Kotlin](https://kotlinlang.org/)
+- **Interface (UI):** [Jetpack Compose](https://developer.android.com/jetpack/compose) (Design System reativo e modular)
+- **Injeção de Dependência:** [Hilt](https://dagger.dev/hilt/)
+- **Assincronismo:** Kotlin Coroutines & `Flow`
+- **Banco de Dados Local:** [Room](https://developer.android.com/training/data-storage/room)
+- **Backend & Cloud:** Supabase (Remote Data) & Firebase (Auth, Crashlytics, App Distribution)
+- **Processamento de Documentos:** PDFBox Android
+- **Build System:** Gradle (Kotlin DSL, Version Catalogs `libs.versions.toml` e KSP)
+
+---
+
+## 🏗️ Arquitetura e Estrutura
+
+O projeto adota uma **arquitetura multi-módulo** dividida em camadas bem definidas, seguindo as recomendações oficiais de arquitetura Android:
+
+```text
+├── app/                  # Entrypoint da aplicação e navegação principal
+└── toolkit/              # Módulos reutilizáveis
+    ├── core/             # Utilitários globais e extensões
+    ├── designsystem/     # Componentes de UI, temas e tokens
+    ├── build-logic/      # Plugins customizados de build do Gradle
+    └── feature-*/        # Módulos de funcionalidade (auth, camera, location, etc.)

@@ -1,0 +1,63 @@
+package com.vald3nir.myexams.presentation.features.exams.details
+
+import androidx.lifecycle.viewModelScope
+import com.vald3nir.myexams.domain.dto.ExamDTO
+import com.vald3nir.myexams.domain.validations.validateExam
+import com.vald3nir.myexams.repository.AppRepository
+import com.vald3nir.toolkit.core.baseclasses.BaseUiState
+import com.vald3nir.toolkit.core.baseclasses.BaseViewModel
+import com.vald3nir.toolkit.core.baseclasses.BaseViewModelParameters
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+internal class ExamDetailsViewModel @Inject constructor(
+    parameters: BaseViewModelParameters,
+    private val repository: AppRepository,
+) : BaseViewModel(parameters) {
+
+    private val examFlow = MutableStateFlow<ExamDTO?>(null)
+
+    val screenDataFlow: StateFlow<ExamDetailsUiModel> by lazy {
+        combine(
+            examFlow, repository.loadProfileFlow()
+        ) { exam, profile ->
+            ExamDetailsUiModel(exam = exam ?: ExamDTO(), validation = validateExam(exam, profile))
+        }.onStart {
+            notifyState(BaseUiState.LoadingState(true))
+        }.onEach {
+            notifyState(BaseUiState.ShowState())
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = ExamDetailsUiModel()
+        )
+    }
+
+    fun loadExam(examId: String) {
+        safeLaunch(action = {
+            val exam = repository.getExamById(examId).first()
+            if (exam == null) {
+                navigateBack()
+                return@safeLaunch
+            }
+            examFlow.value = exam
+        })
+    }
+
+    fun deleteExam(examId: String) {
+        safeLaunch(action = {
+            repository.deleteExam(examId)
+            navigateBack()
+        })
+    }
+}
