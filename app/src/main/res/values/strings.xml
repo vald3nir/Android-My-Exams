@@ -1,42 +1,87 @@
 <resources>
-    <string name="app_name">Meus Exames</string>
+    <!-- ============ APP ============ -->
+    <string name="app_name">Exames de sangue</string>
 
-    <!-- Actions -->
-    <string name="loading">Carregando</string>
-    <string name="logout">Sair</string>
-    <string name="login">Login</string>
-    <string name="insert">Inserir</string>
-    <string name="delete">Remover</string>
-    <string name="edit">Editar</string>
-    <string name="update">Atualizar</string>
+    <!-- ============ COMMON ACTIONS ============ -->
     <string name="btn_continue">Continuar</string>
-    <string name="research">Pesquisar</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_insert">Inserir</string>
+    <string name="btn_update">Atualizar</string>
+    <string name="common_not_available">N/A</string>
 
-    <!-- Screens -->
-    <string name="edit_profile_title">Editar Perfil</string>
-    <string name="edit_profile_description">Preencha os campos abaixo para atualizar seu perfil. As informações fornecidas são essenciais para a validação adequada dos exames.</string>
-    <string name="select_laboratory">Seleção de laboratório</string>
-    <string name="select_laboratory_description">Antes de cadastrar um novo exame, informe o nome do laboratório onde a coleta foi feita.</string>
-    <string name="edit_laboratory_description">Informe o nome do laboratório onde a coleta foi feita.</string>
-    <string name="select_exam_date">Seleção de data do exame</string>
-    <string name="select_exam_date_description">Selecione a data que foi realizado o exame.</string>
-    <string name="edit_exam_date">Editar data</string>
-    <string name="insert_new_exam">Inserir Novo Exame</string>
-    <string name="new_exam">Novo Exame</string>
-    <string name="exam_history">Histórico de Exames</string>
-    <string name="date">Data</string>
-    <string name="exam_detail">Detalhes do exame</string>
+    <!-- ============ APP NAVIGATION ============ -->
+    <string name="app_navigation_tab_home">Home</string>
+    <string name="app_navigation_tab_history">Evolução</string>
+    <string name="app_navigation_tab_profile">Perfil</string>
+
+    <!-- ============ HOME SCREEN ============ -->
+    <string name="home_screen_btn_add">Inserir novo exame</string>
+    <string name="home_screen_search_list">Pesquisar exame</string>
+    <string name="home_screen_title">Meus exames</string>
+    <string name="home_screen_laboratory_not_specified">Laboratório não informado</string>
+
+    <!-- ============ EMPTY STATE ============ -->
+    <string name="empty_state_btn_label">Inserir novo exame</string>
+    <string name="empty_state_message">Sem exames cadastrados</string>
+
+    <!-- ============ OFFLINE STATE ============ -->
+    <string name="offline_state_btn_label">Abrir configurações de Wi-Fi</string>
+    <string name="offline_state_message">Você está offline</string>
+
+    <!-- ============ COMPLETE PROFILE SCREEN ============ -->
+    <string name="complete_profile_title">Complete seu perfil</string>
+    <string name="complete_profile_description">Para completar seu perfil, é necessário informar seu gênero e data de nascimento para continuar.</string>
+    <string name="complete_profile_select_biological_sex">Selecione o seu sexo biológico</string>
+
+    <!-- ============ PROFILE SCREEN ============ -->
+    <string name="profile_screen_birthdate">Data de nascimento</string>
+    <string name="profile_screen_birthdate_invalid">Data de nascimento inválida.</string>
+    <string name="profile_screen_email">Email</string>
+    <string name="profile_screen_gender">Gênero</string>
+    <string name="profile_screen_name">Nome</string>
+    <string name="profile_screen_no_date_selected">Nenhuma data selecionada</string>
+    <string name="profile_screen_age">Idade: %1$s</string>
+    <string name="profile_change_user">Trocar de usuário</string>
+
+    <!-- ============ PROFILE DIALOGS ============ -->
+    <string name="dialog_update_name_title">Atualizar Nome</string>
+    <string name="dialog_update_name_label">Nome</string>
+    <string name="dialog_update_gender_title">Atualizar Gênero</string>
+
+    <!-- ============ CREATE EXAM SCREEN ============ -->
+    <string name="create_exam_screen_title">Criar novo exame</string>
+    <string name="create_exam_screen_select_lab_label">Seleção de laboratório</string>
+    <string name="create_exam_screen_select_lab_placeholder">Laboratório</string>
+    <string name="create_exam_step_pdf_title">Etapa 1 de 4: importar PDF (opcional)</string>
+    <string name="create_exam_step_pdf_description">Você pode importar um arquivo PDF do exame para preencher os campos automaticamente.</string>
+    <string name="create_exam_step_pdf_select_button">Selecionar arquivo PDF</string>
+    <string name="create_exam_step_pdf_optional_description">Se preferir, toque em Continuar para preencher manualmente.</string>
+    <string name="create_exam_pdf_import_error">Não foi possível abrir o arquivo PDF selecionado.</string>
+    <string name="create_exam_step_date_title">Etapa 2 de 4: data do exame</string>
+    <string name="create_exam_step_date_description">Selecione apenas o dia em que o exame foi realizado.</string>
+    <string name="create_exam_step_lab_title">Etapa 3 de 4: laboratório</string>
+    <string name="create_exam_step_lab_description">Informe o nome do laboratório responsável pela coleta.</string>
+    <string name="create_exam_step_lab_optional_description">Ou então, selecione um laboratório existente.</string>
+    <string name="create_exam_step_fields_title">Etapa 4 de 4: resultados</string>
+    <string name="create_exam_step_fields_description">Agora preencha os valores de cada marcador do exame.</string>
+    <string name="create_exam_total_cholesterol_description">Valor total de colesterol encontrado no exame.</string>
+    <string name="create_exam_hdl_description">Valor do colesterol HDL, conhecido como colesterol bom.</string>
+    <string name="create_exam_non_hdl_description">Resultado de não-HDL, que ajuda a medir o colesterol aterogênico.</string>
+    <string name="create_exam_ldl_description">Valor do LDL, o colesterol de maior risco cardiovascular.</string>
+    <string name="create_exam_triglycerides_description">Quantidade de triglicérides informada no exame.</string>
+    <string name="create_exam_uric_acid_description">Valor do ácido úrico medido na análise.</string>
+
+    <!-- ============ EDIT EXAM SCREEN ============ -->
     <string name="update_exam">Atualizar Exame</string>
-    <string name="status_normal">Normal</string>
-    <string name="status_altered">Alterações: %1$d</string>
-    <string name="selected_date_">Data selecionada: %1$s</string>
-    <string name="select_date">Selecionar data</string>
-    <string name="birthday_date_">Data de nascimento:</string>
-    <string name="gender_">Gênero:</string>
+    <string name="edit_exam_step_date_title">Etapa 1 de 3: data do exame</string>
+    <string name="edit_exam_step_date_description">Selecione apenas o dia em que o exame foi realizado.</string>
+    <string name="edit_exam_step_lab_title">Etapa 2 de 3: laboratório</string>
+    <string name="edit_exam_step_lab_description">Informe o nome do laboratório responsável pela coleta.</string>
+    <string name="edit_exam_step_lab_optional_description">Ou então, selecione um laboratório existente.</string>
+    <string name="edit_exam_step_fields_title">Etapa 3 de 3: resultados</string>
+    <string name="edit_exam_step_fields_description">Agora atualize os valores de cada marcador do exame.</string>
 
-    <!-- Exam Fields -->
-    <string name="lab_">Laboratório:</string>
-    <string name="exam_date_">Data do exame:</string>
+    <!-- ============ EXAM MARKERS ============ -->
     <string name="total_cholesterol">Colesterol Total</string>
     <string name="hdl_d">HDL-D</string>
     <string name="no_hdl">Não-HDL</string>
@@ -44,23 +89,21 @@
     <string name="triglycerides">Triglicérides</string>
     <string name="uric_acid">Ácido Úrico</string>
 
-    <!-- Messages -->
-    <string name="exams_not_found_description">Você ainda não tem exames cadastrados.\n\nPara inserir um novo exame basta apertar o botão abaixo.</string>
-    <string name="edit_exam_detail">Preencha os campos abaixo para atualizar os resultados do seu exame de sangue."</string>
-    <string name="create_exam_detail">Preencha os campos abaixo para incluir os resultados do seu exame de sangue."</string>
-    <string name="warning_date_empty">Você deve informar uma data valida!</string>
-    <string name="message_insert_exam">Exame Adicionado com sucesso</string>
-    <string name="message_exam_updated">Exame atualizado com sucesso</string>
-    <string name="message_exam_deleted">O exame foi removido</string>
-    <string name="empty_list_message">Você ainda não cadastrou nenhum exame.</string>
+    <!-- ============ EVOLUTION SCREEN ============ -->
+    <string name="evolution_screen_title">Histórico de evolução</string>
+    <string name="evolution_screen_description">Acompanhe a evolução de cada marcador com base na data e no valor informado em cada exame.</string>
+    <string name="evolution_screen_no_data">Sem dados suficientes para exibir este gráfico.</string>
 
-    <!-- Edit exam menu -->
-    <string name="edit_exam_lab">Editar laboratório</string>
-    <string name="edit_exam_fields">Editar exame</string>
-    <string name="delete_exam">Apagar exame</string>
+    <!-- ============ SELECT EXAM DATE SCREEN ============ -->
+    <string name="select_date">Selecionar data</string>
+    <string name="selected_date_">Data selecionada: %1$s</string>
+    <string name="select_exam_date_description">Selecione a data que foi realizado o exame.</string>
 
-    <!-- Dialog -->
-    <string name="dialog_delete_exam_message">Deseja remover este exame?</string>
-    <string name="dialog_btn_confirm">Sim</string>
-    <string name="dialog_btn_cancel">Não</string>
+    <!-- ============ EXAM DETAILS ============ -->
+    <string name="exam_details_date_label">Data</string>
+    <string name="exam_details_description">Confira os resultados preenchidos e veja se algum marcador ficou fora da faixa esperada.</string>
+    <string name="exam_details_edit_button">Editar campos</string>
+    <string name="exam_details_lab_label">Laboratório</string>
+    <string name="exam_details_results_title">Resultados do exame</string>
+    <string name="exam_details_title">Detalhes do exame</string>
 </resources>

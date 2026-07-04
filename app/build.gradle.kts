@@ -1,51 +1,69 @@
-import com.toolkit.plugs.getEnvParameter
+import com.google.firebase.appdistribution.gradle.AppDistributionExtension
+import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
+import com.toolkit.plugs.AppEnvironmentParameters
 import com.toolkit.plugs.setupSigningConfigs
 
 plugins {
     alias(libs.plugins.toolkit.application)
-    alias(libs.plugins.toolkit.hilt)
-    alias(libs.plugins.toolkit.room)
+    alias(libs.plugins.toolkit.di.hilt)
+    alias(libs.plugins.toolkit.network)
+    alias(libs.plugins.baselineprofile)
+    alias(libs.plugins.gms)
     alias(libs.plugins.toolkit.firebase)
-    alias(libs.plugins.serialization)
-    alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.toolkit.supabase)
+    alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.firebase.appdistribution)
-    alias(libs.plugins.google.firebase.crashlytics)
 }
-
-// todo replace for your .env file path
-val envFilePath = "D:\\Documents\\GitHub\\Documents\\environments\\my-exams.env"
-val pathKeyStore = getEnvParameter(envFilePath = envFilePath, key = "KEY_STORE_PATH")
-val keyAlias = getEnvParameter(envFilePath = envFilePath, key = "KEY_STORE_ALIAS")
-val keyPassword = getEnvParameter(envFilePath = envFilePath, key = "KEY_STORE_PASSWORD")
-val storePassword = getEnvParameter(envFilePath = envFilePath, key = "STORE_PASSWORD")
-val serverClientID = getEnvParameter(envFilePath = envFilePath, key = "SERVER_CLIENT_ID")
-
-
+val parameters = AppEnvironmentParameters.from(envFilePath = "D:\\MEGA\\GitHub\\environments\\app-my-exams\\param.env")
 
 android {
     namespace = "com.vald3nir.myexams"
     defaultConfig {
         applicationId = namespace
-        versionCode = 1
-        versionName = "2025.1.0"
-
-        setupSigningConfigs(
-            pathKeyStore = pathKeyStore,
-            keyAlias = keyAlias,
-            keyPassword = keyPassword,
-            storePassword = storePassword
-        )
-
-        buildConfigField("String", "SERVER_CLIENT_ID", serverClientID)
+        versionCode = 14
+        versionName = "2026.5.1"
+        buildConfigField("String", "APP_PRIVACY_POLICY_URL", parameters.appPrivacyPolicyURL)
+        buildConfigField("String", "APP_TERMS_USE_URL", parameters.termsUseURL)
+        buildConfigField("String", "WEB_GOOGLE_CLIENT_ID", parameters.webGoogleClientID)
         buildConfigField("int", "DB_VERSION", versionCode.toString())
+        buildConfigField("String", "SUPABASE_URL", parameters.supabaseUrl)
+        buildConfigField("String", "SUPABASE_KEY", parameters.supabaseKey)
+    }
+    setupSigningConfigs(parameters = parameters)
+    buildTypes.configureEach {
+        extensions.configure<CrashlyticsExtension> {
+            mappingFileUploadEnabled = false
+        }
+        if (name == "release") {
+            configure<AppDistributionExtension> {
+                serviceCredentialsFile = parameters.firebaseServiceCredentialsFilePath
+                groups = "grupo-de-teste"
+            }
+        }
     }
 }
 
+baselineProfile {
+    automaticGenerationDuringBuild = false
+    dexLayoutOptimization = true
+}
+
 dependencies {
-    implementation(project(":toolkit:compose"))
-    implementation(project(":toolkit:helpers"))
-    implementation(project(":toolkit:networking"))
-    implementation(project(":toolkit:firebase"))
-    implementation(project(":toolkit:autentication"))
-    implementation(libs.firebase.crashlytics)
+    implementation(project(":toolkit:core"))
+    implementation(project(":toolkit:libs:auth"))
+    implementation(project(":toolkit:libs:camera"))
+
+    // PDF Reader
+    implementation("com.tom-roush:pdfbox-android:2.0.27.0")
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
+tasks.register("buildProdVersion") {
+    dependsOn("appDistributionUploadProdRelease")
+    doLast {
+        println("✓ Build prod release .aab gerado e enviado para Firebase App Distribution com sucesso!")
+    }
 }

@@ -1,4 +1,14 @@
 buildscript {
+    repositories {
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+    }
     dependencies {
         classpath(libs.android.gradlePlugin)
     }
@@ -6,14 +16,19 @@ buildscript {
 
 plugins {
     alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.kotlin.android) apply false
-    alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.baselineprofile) apply false
+    alias(libs.plugins.compose) apply false
+    alias(libs.plugins.firebase.crashlytics) apply false
+    alias(libs.plugins.firebase.perf) apply false
+    alias(libs.plugins.gms) apply false
     alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.module.graph) apply true
     alias(libs.plugins.room) apply false
-    alias(libs.plugins.serialization) apply false
-    alias(libs.plugins.google.gms.google.services) apply false
+    alias(libs.plugins.secrets) apply false
     alias(libs.plugins.google.firebase.appdistribution) apply false
-    alias(libs.plugins.google.firebase.crashlytics) apply false
 }

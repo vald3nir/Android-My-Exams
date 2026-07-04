@@ -1,6 +1,15 @@
 # Please add these rules to your existing keep rules in order to suppress warnings.
 # This is generated automatically by the Android Gradle plugin.
 -dontwarn coil3.PlatformContext
+-dontwarn org.apache.log4j.Level
+-dontwarn org.apache.log4j.Logger
+-dontwarn org.apache.log4j.Priority
+-dontwarn org.apache.logging.log4j.Level
+-dontwarn org.apache.logging.log4j.LogManager
+-dontwarn org.apache.logging.log4j.Logger
+-dontwarn org.apache.logging.log4j.message.MessageFactory
+-dontwarn org.apache.logging.log4j.spi.ExtendedLogger
+-dontwarn org.apache.logging.log4j.spi.ExtendedLoggerWrapper
 -dontwarn com.aayushatharva.brotli4j.Brotli4jLoader
 -dontwarn com.aayushatharva.brotli4j.decoder.DecoderJNI$Status
 -dontwarn com.aayushatharva.brotli4j.decoder.DecoderJNI$Wrapper
@@ -123,6 +132,8 @@
 -dontwarn javax.tools.StandardLocation
 -dontwarn reactor.core.scheduler.NonBlocking
 -dontwarn reactor.blockhound.integration.BlockHoundIntegration
+-dontwarn java.lang.management.ManagementFactory
+-dontwarn java.lang.management.RuntimeMXBean
 
 # Jetpack Compose
 -keep class androidx.compose.** { *; }
@@ -214,3 +225,6 @@
 
 # Garante que as classes do Kotlin sejam mantidas (caso use Kotlin)
 -keepclassmembers class kotlin.Metadata { *; }
+
+-dontwarn com.gemalto.jp2.JP2Decoder
+-dontwarn com.gemalto.jp2.JP2Encoder
