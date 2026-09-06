@@ -6,7 +6,9 @@ import com.vald3nir.toolkit.auth.repository.FirebaseAuthenticator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 internal class LabsUseCase @Inject constructor(
     private val labsDataSource: LabsDataSource,
     private val examsDataSource: ExamsDataSource,

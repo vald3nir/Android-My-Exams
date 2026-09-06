@@ -57,7 +57,7 @@ internal fun HomeScreen(
             return
         }
 
-        is BaseUiState.ShowState -> {
+        else -> {
             ScreenContent(
                 searchQuery = searchQuery,
                 items = homeData?.items.orEmpty(),
@@ -66,8 +66,6 @@ internal fun HomeScreen(
                 onClickOpenExam = onClickOpenExam
             )
         }
-
-        else -> Unit
     }
 }
 

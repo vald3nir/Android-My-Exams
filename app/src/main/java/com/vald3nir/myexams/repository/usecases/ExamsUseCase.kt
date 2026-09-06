@@ -13,9 +13,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-internal class ExamsUseCase @Inject constructor(
-    private val examsDataSource: ExamsDataSource
-) {
+internal class ExamsUseCase @Inject constructor(private val examsDataSource: ExamsDataSource) {
 
     private fun userEmail() = FirebaseAuthenticator.getFirebaseUser()?.email.orEmpty()
 
@@ -29,20 +27,6 @@ internal class ExamsUseCase @Inject constructor(
     fun examsStateFlow(): Flow<List<ExamDTO>?> = stateFlow.onStart {
         if (stateFlow.value == null) updateStateFlow()
     }
-
-//    fun listExamsHomeScreen(): Flow<List<ExamsHomeScreenDTO>> = refreshFlow.mapLatest {
-//        val email = FirebaseAuthenticator.getFirebaseUser()?.email.orEmpty()
-//        val exams = examsDataSource.loadExams()
-//        val profile = profileDataSource.loadProfile(email)
-//        exams.map { exam ->
-//            ExamsHomeScreenDTO(
-//                id = exam.id,
-//                date = exam.date,
-//                lab = exam.lab,
-//                hasAlerts = validateExam(exam, profile).hasAlerts(),
-//            )
-//        }
-//    }
 
     suspend fun insertExam(exam: ExamDTO) {
         val email = FirebaseAuthenticator.getFirebaseUser()?.email.orEmpty()
