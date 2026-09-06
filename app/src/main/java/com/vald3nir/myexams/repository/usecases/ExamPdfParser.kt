@@ -1,11 +1,11 @@
 package com.vald3nir.myexams.repository.usecases
 
+import com.tom_roush.pdfbox.pdmodel.PDDocument
+import com.tom_roush.pdfbox.text.PDFTextStripper
 import com.vald3nir.myexams.domain.dto.ExamDTO
 import java.io.File
 import java.text.Normalizer
 import java.util.Locale
-import com.tom_roush.pdfbox.pdmodel.PDDocument
-import com.tom_roush.pdfbox.text.PDFTextStripper
 
 internal object ExamPdfParser {
 
