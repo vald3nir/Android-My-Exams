@@ -22,10 +22,7 @@ internal class AuthenticatedUserRepositoryImpl @Inject constructor(
 
     override fun loadAuthenticatedUser(): Flow<AuthenticatedUserDTO> = flow { emit(FirebaseAuthenticator.getFirebaseUser() ?: AuthenticatedUserDTO()) }
 
-    override suspend fun logout() {
-        FirebaseAuthenticator.disconnect()
-        profileUseCase.logout()
-    }
+    override suspend fun logout() = FirebaseAuthenticator.disconnect()
 
     override suspend fun onAuthenticateWithGoogle(googleIdToken: String, uuid: UUID) = supabaseClient.auth.signInWith(IDToken) {
         idToken = googleIdToken
