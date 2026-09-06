@@ -16,8 +16,7 @@ internal class ProfileUseCase @Inject constructor(
     private val analytics: AnalyticsHelper,
     private val dataSource: ProfileDataSource
 ) {
-
-    private val profileStateFlow = MutableStateFlow<ProfileDTO?>(null)
+    private val stateFlow = MutableStateFlow<ProfileDTO?>(null)
 
     suspend fun loadProfile(): ProfileDTO? {
         val email = FirebaseAuthenticator.getFirebaseUser()?.email.orEmpty()
@@ -26,16 +25,12 @@ internal class ProfileUseCase @Inject constructor(
         return profile
     }
 
-    private suspend fun updateProfileStateFlow() {
-        profileStateFlow.value = loadProfile()
+    private suspend fun updateStateFlow() {
+        stateFlow.value = loadProfile()
     }
 
-    fun loadProfileFlow(): Flow<ProfileDTO?> {
-        return profileStateFlow.onStart {
-            if (profileStateFlow.value == null) {
-                updateProfileStateFlow()
-            }
-        }
+    fun loadProfileFlow(): Flow<ProfileDTO?> = stateFlow.onStart {
+        if (stateFlow.value == null) updateStateFlow()
     }
 
     suspend fun createProfile(authenticatedUser: AuthenticatedUserDTO?) {
@@ -49,13 +44,13 @@ internal class ProfileUseCase @Inject constructor(
         } else {
             analytics.onLog("profile created!!!")
         }
-        updateProfileStateFlow()
+        updateStateFlow()
     }
 
     suspend fun updateProfile(profile: ProfileDTO) {
         analytics.onLog("updateProfile $profile")
         dataSource.updateProfile(profile)
-        updateProfileStateFlow()
+        updateStateFlow()
     }
 
     suspend fun completeProfile(birthday: String?, gender: String?) {
@@ -63,7 +58,7 @@ internal class ProfileUseCase @Inject constructor(
         val profile = (dataSource.loadProfile(email) ?: ProfileDTO()).copy(birthday = birthday, gender = gender)
         analytics.onLog("completeProfile email=$email, birthday=$birthday, gender=$gender profile=$profile")
         dataSource.updateProfile(profile)
-        updateProfileStateFlow()
+        updateStateFlow()
     }
 }
 

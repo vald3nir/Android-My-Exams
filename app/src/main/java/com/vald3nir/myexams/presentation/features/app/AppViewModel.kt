@@ -49,8 +49,8 @@ internal class AppViewModel @Inject constructor(
 
     val showEvolutionTabFlow: StateFlow<Boolean> by lazy {
         repository
-            .listExams()
-            .map { exams -> exams.size > 2 }
+            .listExamsFlow()
+            .map { exams -> exams.orEmpty().size > 2 }
             .catch { emit(false) }
             .stateIn(
                 scope = viewModelScope,

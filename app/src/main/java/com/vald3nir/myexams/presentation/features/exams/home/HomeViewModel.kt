@@ -1,7 +1,6 @@
 package com.vald3nir.myexams.presentation.features.exams.home
 
 import androidx.lifecycle.viewModelScope
-import com.vald3nir.myexams.domain.dto.HomeScreenDTO
 import com.vald3nir.myexams.repository.AppRepository
 import com.vald3nir.toolkit.core.baseclasses.BaseUiState
 import com.vald3nir.toolkit.core.baseclasses.BaseViewModel
@@ -28,18 +27,17 @@ internal class HomeViewModel @Inject constructor(
         searchQuery.value = query
     }
 
-    val screenDataFlow: StateFlow<HomeScreenDTO?> by lazy {
+    val screenDataFlow: StateFlow<HomeUIModel?> by lazy {
         combine(
-            repository.listExamsHomeScreen(),
+            repository.listExamsFlow(),
             hasInternetConnection,
             searchQuery
         ) { exams, hasConnection, query ->
-            val normalizedQuery = query.trim().lowercase()
-            if (normalizedQuery.isEmpty()) {
-                HomeScreenDTO(hasInternetConnection = hasConnection, exams = exams)
-            } else {
-                HomeScreenDTO(hasInternetConnection = hasConnection, exams = exams.filter { it.filter(normalizedQuery) })
-            }
+            bindHomeUIModel(
+                exams = exams.orEmpty(),
+                hasInternetConnection = hasConnection,
+                filterText = query
+            )
         }.onStart {
             notifyState(BaseUiState.LoadingState(true))
         }.onEach {
@@ -47,7 +45,7 @@ internal class HomeViewModel @Inject constructor(
                 notifyState(BaseUiState.OffLineState)
                 return@onEach
             }
-            if (it.exams.isEmpty()) {
+            if (it.items.isEmpty()) {
                 notifyState(BaseUiState.EmptySate)
                 return@onEach
             }

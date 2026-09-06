@@ -17,7 +17,6 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.vald3nir.myexams.R
-import com.vald3nir.myexams.domain.dto.ExamsHomeScreenDTO
 import com.vald3nir.myexams.presentation.components.AppPreview
 import com.vald3nir.myexams.presentation.components.AppTopBar
 import com.vald3nir.toolkit.core.baseclasses.BaseUiState
@@ -61,7 +60,7 @@ internal fun HomeScreen(
         is BaseUiState.ShowState -> {
             ScreenContent(
                 searchQuery = searchQuery,
-                exams = homeData?.exams.orEmpty(),
+                items = homeData?.items.orEmpty(),
                 onClickCreateExam = onClickCreateExam,
                 filterLists = viewModel::onSearchQueryChanged,
                 onClickOpenExam = onClickOpenExam
@@ -75,7 +74,7 @@ internal fun HomeScreen(
 @Composable
 private fun ScreenContent(
     searchQuery: String = "",
-    exams: List<ExamsHomeScreenDTO>,
+    items: List<ItemHomeUIModel>,
     filterLists: (key: String) -> Unit = {},
     onClickCreateExam: () -> Unit = {},
     onClickOpenExam: (id: String?) -> Unit = {}
@@ -96,11 +95,11 @@ private fun ScreenContent(
                 verticalArrangement = Arrangement.spacedBy(ToolkitSpacingMd),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                items(exams) { item ->
+                items(items) { item ->
                     ToolkitFieldCard(
                         label = item.lab ?: stringResource(R.string.home_screen_laboratory_not_specified),
                         value = item.date.orEmpty(),
-                        onEdit = { onClickOpenExam(item.id) },
+                        onEdit = { onClickOpenExam(item.idExam) },
                         imageVector = ToolkitIconCatalog.ArrowIndicatorRight
                     )
                 }
@@ -163,9 +162,9 @@ private fun HomeStateContainer(content: @Composable () -> Unit) {
 
 @AppPreview
 @Composable
-private fun PreviewContent(@PreviewParameter(HomeProvider::class) exams: List<ExamsHomeScreenDTO>) {
+private fun PreviewContent(@PreviewParameter(HomeProvider::class) exams: List<ItemHomeUIModel>) {
     ToolkitPreviewContainer {
-        ScreenContent(exams = exams)
+        ScreenContent(items = exams)
     }
 }
 

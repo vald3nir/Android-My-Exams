@@ -22,9 +22,7 @@ internal class AppRepositoryImpl @Inject constructor(
 
     override suspend fun completeProfile(birthday: String?, gender: String?) = profileUseCase.completeProfile(birthday, gender)
 
-    override fun listExams() = examsUseCase.listExams()
-
-    override fun listExamsHomeScreen() = examsUseCase.listExamsHomeScreen()
+    override fun listExamsFlow() = examsUseCase.examsStateFlow()
 
     override fun loadLabsFlow() = labsUseCase.loadLabsFlow()
 

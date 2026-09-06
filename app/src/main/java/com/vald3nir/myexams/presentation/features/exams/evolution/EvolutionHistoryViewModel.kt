@@ -26,8 +26,8 @@ import javax.inject.Inject
 @HiltViewModel
 internal class EvolutionHistoryViewModel @Inject constructor(parameters: BaseViewModelParameters, repository: AppRepository) : BaseViewModel(parameters) {
 
-    val screenDataFlow: StateFlow<List<EvolutionFieldChartDTO>> = combine(repository.listExams(), repository.loadProfileFlow()) { exams, profile ->
-        val sortedExams = exams.sortedBy { exam -> exam.date.toLocalDateOrNull() ?: LocalDate.MAX }
+    val screenDataFlow: StateFlow<List<EvolutionFieldChartDTO>> = combine(repository.listExamsFlow(), repository.loadProfileFlow()) { exams, profile ->
+        val sortedExams = exams.orEmpty().sortedBy { exam -> exam.date.toLocalDateOrNull() ?: LocalDate.MAX }
         val completeProfile = profile?.takeUnless { it.needCompleteProfile() }
         val lipidParams = completeProfile?.getLipidValidationParams()
         val uricAcidRange = completeProfile?.getUricAcidValidationRange()
