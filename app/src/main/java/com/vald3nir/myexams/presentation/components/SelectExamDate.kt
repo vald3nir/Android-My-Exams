@@ -9,6 +9,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.vald3nir.myexams.R
+import com.vald3nir.toolkit.core.utils.extensions.isoToShortDate
 import com.vald3nir.toolkit.designsystem.components.ToolkitSpaceHeight
 import com.vald3nir.toolkit.designsystem.components.ToolkitSpacingMd
 import com.vald3nir.toolkit.designsystem.components.buttons.ToolkitLinkButton
@@ -32,7 +33,7 @@ internal fun SelectExamDate(
         if (selectedDate.isNotEmpty()) {
             ToolkitSpaceHeight()
             ToolkitText(
-                text = stringResource(R.string.selected_date_, selectedDate),
+                text = stringResource(R.string.selected_date_, selectedDate.isoToShortDate()),
                 style = ToolkitTextStyle.TitleSmall
             )
         }

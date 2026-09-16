@@ -22,12 +22,11 @@ internal object ExamPdfParser {
         return ExamDTO(
             date = findDate(text),
             lab = findLab(rawText),
-            totalCholesterol = findIntValue(text, listOf("COLESTEROL\\s+TOTAL")),
-            hdl = findIntValue(text, listOf("HDL(?:\\s+COLESTEROL)?")),
-            notHdl = findIntValue(text, listOf("NAO\\s+HDL", "COLESTEROL\\s+NAO\\s+HDL")),
-            ldl = findIntValue(text, listOf("LDL(?:\\s+COLESTEROL)?", "COLESTEROL\\s+LDL")),
-            triglycerides = findIntValue(text, listOf("TRIGLICERIDEOS", "TRIGLICERIDES")),
-            uricAcid = findDecimalValue(text, listOf("ACIDO\\s+URICO")),
+            totalCholesterol = findExamValue(text, listOf("COLESTEROL\\s+TOTAL")),
+            hdl = findExamValue(text, listOf("HDL(?:\\s+COLESTEROL)?")),
+            notHdl = findExamValue(text, listOf("NAO\\s+HDL", "COLESTEROL\\s+NAO\\s+HDL")),
+            ldl = findExamValue(text, listOf("LDL(?:\\s+COLESTEROL)?", "COLESTEROL\\s+LDL")),
+            triglycerides = findExamValue(text, listOf("TRIGLICERIDEOS", "TRIGLICERIDES")),
         )
     }
 
@@ -48,12 +47,8 @@ internal object ExamPdfParser {
         return regex.find(originalText)?.groupValues?.get(1)?.trim()?.takeIf { it.isNotBlank() }
     }
 
-    private fun findIntValue(text: String, labels: List<String>): Int? {
-        return findValue(text, labels)?.toIntOrNull()
-    }
-
-    private fun findDecimalValue(text: String, labels: List<String>): Double? {
-        return findValue(text, labels)?.replace(',', '.')?.toDoubleOrNull()
+    private fun findExamValue(text: String, labels: List<String>): Double? {
+        return findValue(text, labels)?.toDoubleOrNull()
     }
 
     private fun findValue(text: String, labels: List<String>): String? {

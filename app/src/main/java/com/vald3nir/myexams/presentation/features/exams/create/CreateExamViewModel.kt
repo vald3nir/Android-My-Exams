@@ -4,7 +4,6 @@ import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.viewModelScope
 import com.vald3nir.myexams.R
-import com.vald3nir.myexams.domain.dto.CreateExamScreenDTO
 import com.vald3nir.myexams.domain.dto.ExamDTO
 import com.vald3nir.myexams.domain.enums.CreateExamStep
 import com.vald3nir.myexams.repository.AppRepository
@@ -19,6 +18,8 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -33,24 +34,27 @@ internal class CreateExamViewModel @Inject constructor(
 
     private val examFlow = MutableStateFlow(ExamDTO())
     private val stepFlow = MutableStateFlow(CreateExamStep.Pdf)
+    val currentStepFlow: StateFlow<CreateExamStep> = stepFlow.asStateFlow()
 
-    val screenDataFlow: StateFlow<CreateExamScreenDTO> = combine(
+    val uiModel: StateFlow<CreateExamUiModel> = combine(
         examFlow,
         appRepository.loadLabsFlow(),
         appRepository.loadTopLabsFlow(),
     ) { exam, labs, topLabs ->
-        CreateExamScreenDTO(
+        CreateExamUiModel(
             exam = exam,
             labs = labs,
             topLabs = topLabs
         )
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = CreateExamScreenDTO(),
-    )
-
-    val currentStepFlow: StateFlow<CreateExamStep> = stepFlow.asStateFlow()
+    }.onStart { notifyState(BaseUiState.LoadingState()) }
+        .onEach { data ->
+            notifyState(BaseUiState.ShowState(data))
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = CreateExamUiModel(),
+        )
 
     fun onExamChanged(exam: ExamDTO) {
         examFlow.value = exam
@@ -75,26 +79,22 @@ internal class CreateExamViewModel @Inject constructor(
     }
 
     fun onPdfSelected(pdfPath: String) {
-        safeLaunch(
-            action = {
-                val parsedExam = appRepository.parseExamFromPdf(pdfPath)
+        runTaskUiState(
+            action = { appRepository.parseExamFromPdf(pdfPath) },
+            onSuccessEvent = { parsedExam ->
                 examFlow.value = mergeParsedExam(examFlow.value, parsedExam)
-            },
-            onSuccessEvent = { stepFlow.value = CreateExamStep.Date },
+                stepFlow.value = CreateExamStep.Date
+            }
         )
     }
 
     fun saveExam() {
-        safeLaunch(
+        runTaskUiState(
             action = {
-                notifyState(BaseUiState.LoadingState())
                 appRepository.insertExam(exam = examFlow.value)
             },
             onSuccessEvent = {
                 notifyState(BaseUiState.FinishState)
-            },
-            onFailureEvent = {
-                notifyState(BaseUiState.ShowState())
             }
         )
     }
@@ -108,7 +108,6 @@ internal class CreateExamViewModel @Inject constructor(
             notHdl = parsed.notHdl ?: current.notHdl,
             ldl = parsed.ldl ?: current.ldl,
             triglycerides = parsed.triglycerides ?: current.triglycerides,
-            uricAcid = parsed.uricAcid ?: current.uricAcid,
         )
     }
 

@@ -71,12 +71,7 @@ private fun ScreenContent(
                 extraIcon = ToolkitIconCatalog.Delete,
                 onClickExtraIcon = { showDeleteExamDialog = true }
             )
-        },
-        bottomBar = {
-            ToolkitFixedButton(
-                label = stringResource(R.string.exam_details_edit_button),
-                onClick = { onClickEditExam(screenData.exam.id) })
-        },
+        }
     ) {
         ToolkitColumn(modifier = Modifier.padding(ToolkitSpacingMd), verticalArrangement = Arrangement.spacedBy(ToolkitSpacingMd)) {
             ToolkitText(text = stringResource(R.string.exam_details_description), style = ToolkitTextStyle.BodyMedium)
@@ -87,6 +82,7 @@ private fun ScreenContent(
                     ExamFieldDetails(label = stringResource(field.label), value = field.value, warning = field.warning)
                 }
             }
+            ToolkitFixedButton(label = stringResource(R.string.exam_details_edit_button), onClick = { onClickEditExam(screenData.exam.id) })
         }
     }
     if (showDeleteExamDialog) {

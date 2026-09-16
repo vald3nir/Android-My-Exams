@@ -1,6 +1,9 @@
 package com.vald3nir.myexams.presentation.features.exams.home
 
 import androidx.lifecycle.viewModelScope
+import com.vald3nir.myexams.domain.dto.ExamDTO
+import com.vald3nir.myexams.domain.dto.ProfileDTO
+import com.vald3nir.myexams.domain.validations.validateExam
 import com.vald3nir.myexams.repository.AppRepository
 import com.vald3nir.toolkit.core.baseclasses.BaseUiState
 import com.vald3nir.toolkit.core.baseclasses.BaseViewModel
@@ -30,11 +33,13 @@ internal class HomeViewModel @Inject constructor(
     val screenDataFlow: StateFlow<HomeUiModel?> by lazy {
         combine(
             repository.listExamsFlow(),
+            repository.loadProfileFlow(),
             hasInternetConnection,
             searchQuery
-        ) { exams, hasConnection, query ->
+        ) { exams, profile, hasConnection, query ->
             bindHomeUIModel(
                 exams = exams.orEmpty(),
+                profile = profile,
                 hasInternetConnection = hasConnection,
                 filterText = query
             )
@@ -46,7 +51,7 @@ internal class HomeViewModel @Inject constructor(
                 return@onEach
             }
             if (it.items.isEmpty()) {
-                notifyState(BaseUiState.EmptySate)
+                notifyState(BaseUiState.EmptyState)
                 return@onEach
             }
             notifyState(BaseUiState.ShowState())
@@ -56,4 +61,25 @@ internal class HomeViewModel @Inject constructor(
             initialValue = null
         )
     }
+
+    private fun bindHomeUIModel(exams: List<ExamDTO>, profile: ProfileDTO?, hasInternetConnection: Boolean, filterText: String): HomeUiModel {
+        val normalizedQuery = filterText.trim().lowercase()
+        var items: List<ItemHomeUiModel> = exams.map { exam ->
+            ItemHomeUiModel(
+                idExam = exam.id,
+                date = exam.date,
+                lab = exam.lab,
+                alerts = validateExam(exam, profile).alertsSize
+            )
+        }
+        if (normalizedQuery.isNotEmpty()) {
+            items = items.filter { it.filter(normalizedQuery) }
+        }
+        return HomeUiModel(
+            items = items,
+            hasInternetConnection = hasInternetConnection,
+        )
+    }
+
+    private fun ItemHomeUiModel.filter(query: String) = date?.contains(query, ignoreCase = true) == true || lab?.contains(query, ignoreCase = true) == true
 }

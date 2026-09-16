@@ -1,7 +1,7 @@
 package com.vald3nir.myexams.presentation.features.exams.home
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,15 +17,15 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.vald3nir.myexams.R
+import com.vald3nir.myexams.presentation.components.AppHeader
 import com.vald3nir.myexams.presentation.components.AppPreview
-import com.vald3nir.myexams.presentation.components.AppTopBar
+import com.vald3nir.myexams.presentation.components.HomeExamsCell
 import com.vald3nir.toolkit.core.baseclasses.BaseUiState
 import com.vald3nir.toolkit.core.utils.extensions.openWifiSettings
 import com.vald3nir.toolkit.designsystem.components.ToolkitSpacingMd
 import com.vald3nir.toolkit.designsystem.components.buttons.ToolkitBaseButton
 import com.vald3nir.toolkit.designsystem.components.icons.ToolkitIconCatalog
 import com.vald3nir.toolkit.designsystem.components.inputs.ToolkitSearchFiled
-import com.vald3nir.toolkit.designsystem.components.lists.ToolkitFieldCard
 import com.vald3nir.toolkit.designsystem.extensions.ToolkitPreviewContainer
 import com.vald3nir.toolkit.designsystem.templates.ToolkitColumn
 import com.vald3nir.toolkit.designsystem.templates.ToolkitEmptyStateScreen
@@ -47,7 +47,7 @@ internal fun HomeScreen(
             return
         }
 
-        is BaseUiState.EmptySate -> {
+        is BaseUiState.EmptyState -> {
             EmptyState(onClickCreateExam = onClickCreateExam)
             return
         }
@@ -77,32 +77,33 @@ private fun ScreenContent(
     onClickCreateExam: () -> Unit = {},
     onClickOpenExam: (id: String?) -> Unit = {}
 ) {
-    HomeStateContainer {
-        ToolkitColumn {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(ToolkitSpacingMd),
+        verticalArrangement = Arrangement.spacedBy(ToolkitSpacingMd),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
 
+        item {
+            AppHeader()
             ToolkitSearchFiled(
                 label = stringResource(R.string.home_screen_search_list),
                 searchQuery = searchQuery,
                 onValueChange = filterLists,
             )
+        }
 
-            LazyColumn(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(ToolkitSpacingMd),
-                verticalArrangement = Arrangement.spacedBy(ToolkitSpacingMd),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                items(items) { item ->
-                    ToolkitFieldCard(
-                        label = item.lab ?: stringResource(R.string.home_screen_laboratory_not_specified),
-                        value = item.date.orEmpty(),
-                        onEdit = { onClickOpenExam(item.idExam) },
-                        imageVector = ToolkitIconCatalog.ArrowIndicatorRight
-                    )
-                }
-            }
+        items(items) { item ->
+            HomeExamsCell(
+                lab = item.lab,
+                date = item.date.orEmpty(),
+                alerts = item.alerts,
+                onEdit = { onClickOpenExam(item.idExam) },
+            )
+        }
 
+        item {
             ToolkitBaseButton(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -118,8 +119,17 @@ private fun ScreenContent(
 
 @Composable
 private fun EmptyState(onClickCreateExam: () -> Unit = {}) {
-    HomeStateContainer {
+    ToolkitColumn(
+        paddingStart = ToolkitSpacingMd,
+        paddingTop = ToolkitSpacingMd,
+        paddingEnd = ToolkitSpacingMd,
+        paddingBottom = ToolkitSpacingMd,
+    ) {
+        AppHeader()
         ToolkitEmptyStateScreen(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
             title = stringResource(R.string.empty_state_message),
             btnText = stringResource(R.string.empty_state_btn_label),
             imageVector = ToolkitIconCatalog.Inbox,
@@ -131,8 +141,17 @@ private fun EmptyState(onClickCreateExam: () -> Unit = {}) {
 @Composable
 private fun OfflineState() {
     val context = LocalContext.current
-    HomeStateContainer {
+    ToolkitColumn(
+        paddingStart = ToolkitSpacingMd,
+        paddingTop = ToolkitSpacingMd,
+        paddingEnd = ToolkitSpacingMd,
+        paddingBottom = ToolkitSpacingMd,
+    ) {
+        AppHeader()
         ToolkitEmptyStateScreen(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
             title = stringResource(R.string.offline_state_message),
             btnText = stringResource(R.string.offline_state_btn_label),
             imageVector = ToolkitIconCatalog.WifiOff,
@@ -141,22 +160,6 @@ private fun OfflineState() {
         )
     }
 }
-
-@Composable
-private fun HomeStateContainer(content: @Composable () -> Unit) {
-    ToolkitColumn {
-        AppTopBar(title = stringResource(R.string.home_screen_title))
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f),
-            contentAlignment = Alignment.Center
-        ) {
-            content()
-        }
-    }
-}
-
 
 @AppPreview
 @Composable

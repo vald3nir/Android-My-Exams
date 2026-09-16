@@ -6,8 +6,6 @@ import com.vald3nir.toolkit.designsystem.components.charts.ItemChartDTO
 
 internal data class EvolutionFieldChartDTO(
     @StringRes val titleRes: Int,
+    val description: String,
     val points: List<ItemChartDTO>,
-    val upperLimit: Float? = null,
-    val lowerLimit: Float? = null,
-    val limitColor: Color = Color(0xFFFF0000)
 )

@@ -1,9 +1,9 @@
 package com.vald3nir.myexams.presentation.features.exams.edit
 
 import androidx.lifecycle.viewModelScope
-import com.vald3nir.myexams.domain.dto.CreateExamScreenDTO
 import com.vald3nir.myexams.domain.dto.ExamDTO
 import com.vald3nir.myexams.domain.enums.CreateExamStep
+import com.vald3nir.myexams.presentation.features.exams.create.CreateExamUiModel
 import com.vald3nir.myexams.repository.AppRepository
 import com.vald3nir.toolkit.core.baseclasses.BaseViewModel
 import com.vald3nir.toolkit.core.baseclasses.BaseViewModelParameters
@@ -26,12 +26,12 @@ internal class EditExamViewModel @Inject constructor(
     private val examFlow = MutableStateFlow(ExamDTO())
     private val stepFlow = MutableStateFlow(CreateExamStep.Date)
 
-    val screenDataFlow: StateFlow<CreateExamScreenDTO> = combine(
+    val screenDataFlow: StateFlow<CreateExamUiModel> = combine(
         examFlow,
         appRepository.loadLabsFlow(),
         appRepository.loadTopLabsFlow(),
     ) { exam, labs, topLabs ->
-        CreateExamScreenDTO(
+        CreateExamUiModel(
             exam = exam,
             labs = labs,
             topLabs = topLabs,
@@ -39,7 +39,7 @@ internal class EditExamViewModel @Inject constructor(
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = CreateExamScreenDTO(),
+        initialValue = CreateExamUiModel(),
     )
 
     val currentStepFlow: StateFlow<CreateExamStep> = stepFlow.asStateFlow()

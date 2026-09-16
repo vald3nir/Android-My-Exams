@@ -3,12 +3,14 @@ package com.vald3nir.myexams.repository.datasource
 import com.vald3nir.myexams.domain.dto.ExamDTO
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.postgrest.query.Order
 import javax.inject.Inject
 
 internal class ExamsDataSource @Inject constructor(private val supabase: SupabaseClient) {
 
     suspend fun loadExams(email: String): List<ExamDTO> = supabase.from(TABLE_NAME).select {
         filter { eq(GROUP_KEY, email) }
+        order(column = "date", order = Order.DESCENDING)
     }.decodeList<ExamDTO>()
 
     suspend fun loadExamById(email: String, examId: String): ExamDTO? = supabase.from(TABLE_NAME).select {
