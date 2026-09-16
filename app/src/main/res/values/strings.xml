@@ -1,6 +1,8 @@
 <resources>
     <!-- ============ APP ============ -->
-    <string name="app_name">Exames de sangue</string>
+    <string name="app_name">Meu Colesterol</string>
+    <string name="app_description">Monitoramento do Perfil Lipídico</string>
+
 
     <!-- ============ COMMON ACTIONS ============ -->
     <string name="btn_continue">Continuar</string>
@@ -18,8 +20,8 @@
     <!-- ============ HOME SCREEN ============ -->
     <string name="home_screen_btn_add">Inserir novo exame</string>
     <string name="home_screen_search_list">Pesquisar exame</string>
-    <string name="home_screen_title">Meus exames</string>
     <string name="home_screen_laboratory_not_specified">Laboratório não informado</string>
+    <string name="home_screen_date_not_specified">Data não informada</string>
 
     <!-- ============ EMPTY STATE ============ -->
     <string name="empty_state_btn_label">Inserir novo exame</string>
@@ -74,7 +76,6 @@
     <string name="create_exam_non_hdl_description">Resultado de não-HDL, que ajuda a medir o colesterol aterogênico.</string>
     <string name="create_exam_ldl_description">Valor do LDL, o colesterol de maior risco cardiovascular.</string>
     <string name="create_exam_triglycerides_description">Quantidade de triglicérides informada no exame.</string>
-    <string name="create_exam_uric_acid_description">Valor do ácido úrico medido na análise.</string>
 
     <!-- ============ EDIT EXAM SCREEN ============ -->
     <string name="update_exam">Atualizar Exame</string>
@@ -82,7 +83,6 @@
     <string name="edit_exam_step_date_description">Selecione apenas o dia em que o exame foi realizado.</string>
     <string name="edit_exam_step_lab_title">Etapa 2 de 3: laboratório</string>
     <string name="edit_exam_step_lab_description">Informe o nome do laboratório responsável pela coleta.</string>
-    <string name="edit_exam_step_lab_optional_description">Ou então, selecione um laboratório existente.</string>
     <string name="edit_exam_step_fields_title">Etapa 3 de 3: resultados</string>
     <string name="edit_exam_step_fields_description">Agora atualize os valores de cada marcador do exame.</string>
 
@@ -92,7 +92,6 @@
     <string name="no_hdl">Não-HDL</string>
     <string name="ldl">LDL</string>
     <string name="triglycerides">Triglicérides</string>
-    <string name="uric_acid">Ácido Úrico</string>
 
     <!-- ============ EVOLUTION SCREEN ============ -->
     <string name="evolution_screen_title">Histórico de evolução</string>

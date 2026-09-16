@@ -24,15 +24,15 @@ private sealed class Route {
     data object HomeRoute : Route()
 
     @Serializable
-    @SerialName("exam_details")
+    @SerialName("details")
     data class ExamDetailsRoute(val examId: String) : Route()
 
     @Serializable
-    @SerialName("edit_exam")
+    @SerialName("edit")
     data class EditExamRoute(val examId: String) : Route()
 
     @Serializable
-    @SerialName("create_exam")
+    @SerialName("create")
     data object CreateExamRoute : Route()
 }
 

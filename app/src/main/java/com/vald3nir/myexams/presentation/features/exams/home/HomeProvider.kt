@@ -9,20 +9,24 @@ internal class HomeProvider : PreviewParameterProvider<List<ItemHomeUiModel>> {
                 idExam = "exam-001",
                 date = "03/07/2026",
                 lab = "Laboratório São Lucas",
+                alerts = 0,
             ),
             ItemHomeUiModel(
                 idExam = "exam-002",
                 date = "18/06/2026",
                 lab = "Laboratório Vida+",
+                alerts = 1,
             ),
             ItemHomeUiModel(
                 idExam = "exam-003",
                 date = "18/06/2026",
+                alerts = 5,
             ),
             ItemHomeUiModel(
                 idExam = "exam-004",
                 date = "22/05/2026",
                 lab = "Laboratório Central",
+                alerts = 2,
             )
         )
     )

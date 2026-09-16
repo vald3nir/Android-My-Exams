@@ -18,7 +18,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.vald3nir.myexams.R
 import com.vald3nir.myexams.presentation.features.exams.ExamsRouter
-import com.vald3nir.myexams.presentation.features.exams.evolution.EvolutionHistoryScreen
+import com.vald3nir.myexams.presentation.features.evolution.EvolutionHistoryScreen
 import com.vald3nir.myexams.presentation.features.profile.home.HomeProfileScreen
 import com.vald3nir.toolkit.designsystem.components.containers.ToolkitBackground
 import com.vald3nir.toolkit.designsystem.components.containers.ToolkitGradientBackground

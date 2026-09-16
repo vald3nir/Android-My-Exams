@@ -1,12 +1,11 @@
 package com.vald3nir.myexams.presentation.features.exams.create
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.vald3nir.myexams.domain.dto.CreateExamScreenDTO
 import com.vald3nir.myexams.domain.dto.ExamDTO
 
-internal class CreateExamScreenProvider : PreviewParameterProvider<CreateExamScreenDTO> {
-    override val values: Sequence<CreateExamScreenDTO> = sequenceOf(
-        CreateExamScreenDTO(
+internal class CreateExamProvider : PreviewParameterProvider<CreateExamUiModel> {
+    override val values: Sequence<CreateExamUiModel> = sequenceOf(
+        CreateExamUiModel(
             exam = ExamDTO(
                 id = "exam-001",
                 date = "03/07/2026",

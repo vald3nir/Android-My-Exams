@@ -1,15 +1,14 @@
-package com.vald3nir.myexams.domain.dto
+package com.vald3nir.myexams.presentation.features.exams.create
 
 import com.vald3nir.myexams.R
+import com.vald3nir.myexams.domain.dto.ExamDTO
 import com.vald3nir.myexams.domain.enums.CreateExamStep
 
-internal data class CreateExamScreenDTO(
+internal data class CreateExamUiModel(
     val exam: ExamDTO = ExamDTO(),
     val labs: List<String> = emptyList(),
     val topLabs: List<String> = emptyList(),
 ) {
-    fun isValid(): Boolean = exam.date.isNullOrBlank().not() && exam.lab.isNullOrBlank().not()
-
     fun isBottomButtonEnabled(step: CreateExamStep): Boolean = when (step) {
         CreateExamStep.Pdf -> true
         CreateExamStep.Date -> exam.isDateValid()

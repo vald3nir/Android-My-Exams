@@ -1,8 +1,6 @@
 package com.vald3nir.myexams.presentation.features.onboarding
 
 import androidx.lifecycle.viewModelScope
-import com.vald3nir.myexams.domain.dto.AppScreenUiState
-import com.vald3nir.myexams.domain.dto.ProfileDTO
 import com.vald3nir.myexams.repository.AppRepository
 import com.vald3nir.toolkit.auth.repository.FirebaseAuthenticator.observeUserLogged
 import com.vald3nir.toolkit.core.baseclasses.BaseUiState
@@ -23,14 +21,12 @@ internal class OnboardingViewModel @Inject constructor(
     parameters: BaseViewModelParameters,
 ) : BaseViewModel(parameters) {
 
-    private val profileFlow = repository.loadProfileFlow()
-
-    val screenDataFlow: StateFlow<AppScreenUiState> by lazy {
+    val uiModel: StateFlow<OnboardingUiModel> by lazy {
         combine(
             observeUserLogged(),
-            profileFlow
+            repository.loadProfileFlow()
         ) { isUserLogged, currentProfile ->
-            AppScreenUiState(
+            OnboardingUiModel(
                 isUserLogged = isUserLogged,
                 profile = currentProfile
             )
@@ -41,19 +37,7 @@ internal class OnboardingViewModel @Inject constructor(
         }.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = AppScreenUiState()
-        )
-    }
-
-    fun updateProfile(profile: ProfileDTO) {
-        safeLaunch(
-            action = {
-                notifyState(BaseUiState.LoadingState(true))
-                repository.completeProfile(
-                    birthday = profile.birthday,
-                    gender = profile.gender
-                )
-            }
+            initialValue = OnboardingUiModel()
         )
     }
 }

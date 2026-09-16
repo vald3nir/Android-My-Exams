@@ -7,7 +7,6 @@ import com.vald3nir.myexams.domain.enums.genderEnumList
 import com.vald3nir.toolkit.designsystem.components.dialogs.ToolkitAlertDialog
 import com.vald3nir.toolkit.designsystem.components.dialogs.ToolkitInputTextDialog
 import com.vald3nir.toolkit.designsystem.components.dialogs.ToolkitSelectDialog
-import kotlin.collections.remove
 
 @Composable
 internal fun EditProfileNameDialog(

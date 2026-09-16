@@ -3,11 +3,11 @@ package com.vald3nir.myexams.presentation.features.exams.details
 import androidx.annotation.StringRes
 import com.vald3nir.myexams.R
 import com.vald3nir.myexams.domain.dto.ExamDTO
-import com.vald3nir.myexams.domain.dto.ExamValidatedDTO
+import com.vald3nir.myexams.domain.dto.ExamValidationDTO
 
 internal data class ExamDetailsUiModel(
     val exam: ExamDTO = ExamDTO(),
-    val validation: ExamValidatedDTO = ExamValidatedDTO(),
+    val validation: ExamValidationDTO = ExamValidationDTO(),
     val fields: List<ItemExamDetailsUiModel> = listOf(
         ItemExamDetailsUiModel(
             label = R.string.total_cholesterol,
@@ -33,11 +33,6 @@ internal data class ExamDetailsUiModel(
             label = R.string.triglycerides,
             value = exam.triglycerides?.toString(),
             warning = validation.triglyceridesMessage,
-        ),
-        ItemExamDetailsUiModel(
-            label = R.string.uric_acid,
-            value = exam.uricAcid?.toString(),
-            warning = validation.uricAcidMessage,
         ),
     ),
 )
