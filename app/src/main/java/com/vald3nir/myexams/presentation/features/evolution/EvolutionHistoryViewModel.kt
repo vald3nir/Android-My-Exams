@@ -10,6 +10,7 @@ import com.vald3nir.myexams.domain.validations.getLipidValidationParams
 import com.vald3nir.myexams.repository.AppRepository
 import com.vald3nir.toolkit.core.baseclasses.BaseViewModel
 import com.vald3nir.toolkit.core.baseclasses.BaseViewModelParameters
+import com.vald3nir.toolkit.core.utils.extensions.getFormattedDate
 import com.vald3nir.toolkit.core.utils.extensions.isoToShortDate
 import com.vald3nir.toolkit.designsystem.components.charts.ItemChartDTO
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -79,7 +80,7 @@ internal class EvolutionHistoryViewModel @Inject constructor(parameters: BaseVie
     ): EvolutionFieldChartDTO {
         val points = exams.mapNotNull { exam ->
             val value = valueSelector(exam) ?: return@mapNotNull null
-            val label = exam.date?.isoToShortDate() ?: return@mapNotNull null
+            val label = exam.date?.getFormattedDate() ?: return@mapNotNull null
             val isOutOfLimits = (upperLimit != null && value > upperLimit) || (lowerLimit != null && value < lowerLimit)
             ItemChartDTO(
                 value = value,

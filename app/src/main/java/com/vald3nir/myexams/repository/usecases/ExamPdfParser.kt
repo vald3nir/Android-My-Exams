@@ -3,6 +3,7 @@ package com.vald3nir.myexams.repository.usecases
 import com.tom_roush.pdfbox.pdmodel.PDDocument
 import com.tom_roush.pdfbox.text.PDFTextStripper
 import com.vald3nir.myexams.domain.dto.ExamDTO
+import com.vald3nir.toolkit.core.utils.extensions.toLocalDateTime
 import java.io.File
 import java.text.Normalizer
 import java.util.Locale
@@ -20,7 +21,7 @@ internal object ExamPdfParser {
         val text = normalize(rawText)
 
         return ExamDTO(
-            date = findDate(text),
+            date = findDate(text)?.toLocalDateTime(),
             lab = findLab(rawText),
             totalCholesterol = findExamValue(text, listOf("COLESTEROL\\s+TOTAL")),
             hdl = findExamValue(text, listOf("HDL(?:\\s+COLESTEROL)?")),

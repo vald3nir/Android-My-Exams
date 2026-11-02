@@ -8,6 +8,7 @@ import com.vald3nir.myexams.repository.AppRepository
 import com.vald3nir.toolkit.core.baseclasses.BaseUiState
 import com.vald3nir.toolkit.core.baseclasses.BaseViewModel
 import com.vald3nir.toolkit.core.baseclasses.BaseViewModelParameters
+import com.vald3nir.toolkit.core.utils.extensions.getFormattedDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -67,7 +68,7 @@ internal class HomeViewModel @Inject constructor(
         var items: List<ItemHomeUiModel> = exams.map { exam ->
             ItemHomeUiModel(
                 idExam = exam.id,
-                date = exam.date,
+                date = exam.date.getFormattedDate(),
                 lab = exam.lab,
                 alerts = validateExam(exam, profile).alertsSize
             )

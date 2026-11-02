@@ -11,7 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.vald3nir.myexams.R
 import com.vald3nir.myexams.domain.dto.ExamDTO
-import com.vald3nir.toolkit.core.utils.extensions.isoToShortDate
+import com.vald3nir.toolkit.core.utils.extensions.getFormattedDate
+import com.vald3nir.toolkit.core.utils.extensions.toLocalDateTime
 import com.vald3nir.toolkit.designsystem.components.ToolkitSpacingMd
 import com.vald3nir.toolkit.designsystem.components.containers.ToolkitCard
 import com.vald3nir.toolkit.designsystem.components.texts.ToolkitText
@@ -34,7 +35,7 @@ internal fun ExamHeaderDetails(exam: ExamDTO) {
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     ToolkitText(text = stringResource(R.string.exam_details_date_label), style = textStyle)
-                    ToolkitText(text = exam.date?.isoToShortDate() ?: stringResource(R.string.common_not_available), style = textStyle)
+                    ToolkitText(text = exam.date?.getFormattedDate() ?: stringResource(R.string.common_not_available), style = textStyle)
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -53,6 +54,6 @@ internal fun ExamHeaderDetails(exam: ExamDTO) {
 @Composable
 private fun Preview() {
     ToolkitPreviewContainer {
-        ExamHeaderDetails(exam = ExamDTO(date = "2023-01-01", lab = "Lab XYZ"))
+        ExamHeaderDetails(exam = ExamDTO(date = "2023-01-01".toLocalDateTime(), lab = "Lab XYZ"))
     }
 }

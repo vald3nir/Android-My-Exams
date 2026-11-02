@@ -18,6 +18,8 @@ import com.vald3nir.myexams.presentation.components.FieldsStepContent
 import com.vald3nir.myexams.presentation.components.LabStepContent
 import com.vald3nir.myexams.presentation.features.exams.create.CreateExamProvider
 import com.vald3nir.myexams.presentation.features.exams.create.CreateExamUiModel
+import com.vald3nir.toolkit.core.utils.extensions.getFormattedDate
+import com.vald3nir.toolkit.core.utils.extensions.toLocalDateTime
 import com.vald3nir.toolkit.designsystem.components.ToolkitSpacingLg
 import com.vald3nir.toolkit.designsystem.components.buttons.ToolkitFixedButton
 import com.vald3nir.toolkit.designsystem.extensions.ToolkitPreviewContainer
@@ -82,8 +84,8 @@ private fun EditExamScreenContent(
                 CreateExamStep.Date -> DateStepContent(
                     title = stringResource(R.string.edit_exam_step_date_title),
                     description = stringResource(R.string.edit_exam_step_date_description),
-                    selectedDate = contentData.exam.date.orEmpty(),
-                    onSelectDate = { onExamChanged(contentData.exam.copy(date = it)) },
+                    selectedDate = contentData.exam.date.getFormattedDate(),
+                    onSelectDate = { onExamChanged(contentData.exam.copy(date = it.toLocalDateTime())) },
                 )
 
                 CreateExamStep.Lab -> LabStepContent(

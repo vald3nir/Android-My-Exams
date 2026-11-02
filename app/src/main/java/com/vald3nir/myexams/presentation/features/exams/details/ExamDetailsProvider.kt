@@ -3,12 +3,13 @@ package com.vald3nir.myexams.presentation.features.exams.details
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.vald3nir.myexams.domain.dto.ExamDTO
 import com.vald3nir.myexams.domain.dto.ExamValidationDTO
+import com.vald3nir.toolkit.core.utils.extensions.toLocalDateTime
 
 internal class ExamDetailsProvider : PreviewParameterProvider<ExamDetailsUiModel> {
     override val values: Sequence<ExamDetailsUiModel> = sequenceOf(
         ExamDetailsUiModel(
             exam = ExamDTO(
-                date = "05/08/2026",
+                date = "05/08/2026".toLocalDateTime(),
                 lab = "Laboratorio Central",
                 totalCholesterol = 220.0,
                 hdl = 36.0,

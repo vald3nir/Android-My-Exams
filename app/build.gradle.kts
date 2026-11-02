@@ -20,8 +20,8 @@ android {
     namespace = "com.vald3nir.myexams"
     defaultConfig {
         applicationId = namespace
-        versionCode = 1
-        versionName = "2026.2.0"
+        versionCode = 2
+        versionName = "2026.2.1"
         buildConfigField("String", "APP_PRIVACY_POLICY_URL", parameters.appPrivacyPolicyURL)
         buildConfigField("String", "APP_TERMS_USE_URL", parameters.termsUseURL)
         buildConfigField("String", "WEB_GOOGLE_CLIENT_ID", parameters.webGoogleClientID)
